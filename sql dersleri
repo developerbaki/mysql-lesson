@@ -1,0 +1,50 @@
+INSERT INTO ogrenci (ogrenci_ad, ogrenci_soyad) VALUES ("MEHMET FUAT","EROĞLU")
+INSERT INTO ogrenci (ogrenci_ad,ogrenci_no,ogrenci_ulke) VALUES ("BAKİ", 586, "TURKEY")
+INSERT INTO ogrenci (ogrenci_ad,ogrenci_soyad,ogrenci_durum,ogrenci_kayitucreti) VALUES ("SEVKAN", "CELİK", 1, 485)
+INSERT INTO ogrenci (ogrenci_ulke, ogrenci_kayitucreti, ogrenci_ad) VALUES ("BELARUS", 752, "KORAY")
+INSERT INTO ogrenci (ogrenci_kayitzamani, ogrenci_no, ogrenci_ulke, ogrenci_ad) VALUES ("MAYIS", 745, "TURKEY", "MEMETCAN")
+----------------------------------------------------------------------------------------------------------------
+UPDATE ogrenci SET ogrenci_ad="celik", ogrenci_soyad="yılmaz" WHERE ogrenci_id=20
+UPDATE ogrenci SET ogrenci_ulke="turkey", ogrenci_no="562" WHERE ogrenci_ad="Jarrod"
+UPDATE ogrenci SET ogrenci_kayitzamani="temmuz", ogrenci_ulke="Belarus", ogrenci_ad="faruk" WHERE ogrenci_soyad="Clements"
+UPDATE ogrenci SET ogrenci_ad="Kenan", ogrenci_soyad="yılmaz" WHERE ogrenci_ulke="Belarus"
+UPDATE ogrenci SET ogrenci_ad="faik", ogrenci_soyad="inan" WHERE ogrenci_ulke="Azerbaijan"
+----------------------------------------------------------------------------------------------------------------
+DELETE FROM ogrenci WHERE ogrenci_ad="MEHMET FUAT"
+DELETE FROM ogrenci WHERE ogrenci_id=5
+DELETE FROM ogrenci WHERE ogrenci_soyad="Yılmaz"
+----------------------------------------------------------------------------------------------------------------
+SELECT * FROM `ogrenci` WHERE ogrenci_id=27
+SELECT ogrenci_ad AS ogrencilerinadlari FROM ogrenci WHERE ogrenci_durum=1
+SELECT ogrenci_ad FROM ogrenci WHERE ogrenci_id=25
+SELECT ogrenci_ad, ogrenci_soyad, ogrenci_ulke, ogrenci_kayitucreti FROM ogrenci WHERE ogrenci_no>200
+SELECT * FROM ogrenci WHERE ogrenci_durum=1
+----------------------------------------------------------------------------------------------------------------
+ALTER TABLE ogrenci AUTO_INCREMENT=150
+SELECT DISTINCT ogrenci_ulke="TURKEY" FROM ogrenci
+SELECT DISTINCT ogrenci_durum=0 FROM ogrenci
+SELECT * FROM ogrenci WHERE ogrenci_durum=0 ORDER BY ogrenci_soyad ASC 
+SELECT * FROM ogrenci WHERE ogrenci_durum=1 ORDER by ogrenci_ad ASC 
+SELECT ogrenci_ad AS ogrenciler FROM ogrenci WHERE ogrenci_durum=0 ORDER BY ogrenci_soyad ASC
+SELECT * FROM ogrenci WHERE ogrenci_durum=1 ORDER BY ogrenci_ulke DESC LIMIT 10
+SELECT * FROM kitaplar ORDER BY kitap_adi ASC limit 2
+---------------------------------------------------------------------------------------------------------------
+SELECT * FROM ogrenci WHERE ogrenci_ulke IN ("TURKEY","Belarus")
+SELECT * FROM kitaplar WHERE kitap_adi LIKE "%Cıl%"
+SELECT * FROM ogrenci WHERE ogrenci_ad LIKE "%S%"
+SELECT ogrenci_ad AS ogrencilerinbilgileri FROM ogrenci WHERE ogrenci_no>200 AND ogrenci_no<800
+SELECT * FROM ogrenci WHERE ogrenci_no>100 AND ogrenci_no<700 OR ogrenci_durum=1
+SELECT ogrenci_no FROM ogrenci WHERE ogrenci.id BETWEEN 75 AND 90
+SELECT ogrenci_soyad AS ÖğrenciSoyadları FROM ogrenci WHERE ogrenci_no BETWEEN 100 AND 500
+----------------------------------------------------------------------------------------------------------------
+SELECT ogrenci_ad,ogrenci_soyad, CASE ogrenci_durum
+WHEN '0' THEN 'pasif'
+WHEN '1' THEN 'aktif'
+END AS DURUM FROM ogrenci
+SELECT COUNT(*) FROM ogrenci WHERE ogrenci_no>255
+SELECT COUNT(*) FROM ogrenci WHERE ogrenci_no>200 AND ogrenci_no<500  
+SELECT SUM(ogrenci_no) FROM ogrenci WHERE ogrenci_durum=1
+SELECT AVG(ogrenci_id) AS OGRENCİIDORTALAMA FROM ogrenci WHERE ogrenci_durum=1
+SELECT MAX(ogrenci_no) AS MAXIMUMNUMARA, MIN(ogrenci_no) AS mınımumnuamra FROM ogrenci
+SELECT ogrenci_ulke AS ogrencilerinulkeleri FROM ogrenci GROUP by ogrenci_ulke
+SELECT * FROM ogrenci WHERE ogrenci_id>50 GROUP BY ogrenci_ulke
