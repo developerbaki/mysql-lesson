@@ -41,6 +41,7 @@ SELECT ogrenci_ad,ogrenci_soyad, CASE ogrenci_durum
 WHEN '0' THEN 'pasif'
 WHEN '1' THEN 'aktif'
 END AS DURUM FROM ogrenci
+-----------------------------
 SELECT COUNT(*) FROM ogrenci WHERE ogrenci_no>255
 SELECT COUNT(*) FROM ogrenci WHERE ogrenci_no>200 AND ogrenci_no<500  
 SELECT SUM(ogrenci_no) FROM ogrenci WHERE ogrenci_durum=1
@@ -49,3 +50,37 @@ SELECT MAX(ogrenci_no) AS MAXIMUMNUMARA, MIN(ogrenci_no) AS mınımumnuamra FROM
 SELECT ogrenci_ulke AS ogrencilerinulkeleri FROM ogrenci GROUP by ogrenci_ulke
 SELECT * FROM ogrenci WHERE ogrenci_id>50 GROUP BY ogrenci_ulke
 SELECT ogrenci_kayitucreti FROM ogrenci WHERE ogrenci_id>68
+SELECT ogrenci_soyad FROM ogrenci WHERE ogrenci_id BETWEEN 30 AND 40
+SELECT ogrenci_kayitzamani FROM ogrenci GROUP BY ogrenci_ad
+SELECT ogrenci_kayitzamani FROM ogrenci WHERE ogrenci_ad LIKE "%a%" OR ogrenci_durum=1
+SELECT AVG(ogrenci_no) FROM ogrenci WHERE ogrenci_ulke IN ("Turkey","Belarus")
+SELECT MAX(ogrenci_no), MIN(ogrenci_no) FROM ogrenci WHERE ogrenci_durum=1
+SELECT ogrenci_kayitzamani, CASE ogrenci_no
+WHEN ogrenci_no>50 THEN 'alındıgınıztarih'
+WHEN ogrenci_no<50 THEN 'alınmadınız'
+END FROM ogrenci
+------------------------------
+SELECT * FROM ogrenci WHERE ogrenci_id>80 ORDER BY ogrenci_ulke ASC
+SELECT SUM(ogrenci_no) FROM ogrenci WHERE ogrenci_durum=0
+SELECT ogrenci_ad, ogrenci_soyad FROM ogrenci WHERE ogrenci_id=25
+UPDATE ogrenci SET ogrenci_durum=0 WHERE ogrenci_id=25
+SELECT kitaplar.kitap_adi, yazarlar.yazar_ad FROM kitaplar,yazarlar WHERE kitaplar.yazar_id=yazarlar.yazar_id
+SELECT ogrenci_ad as Öğrencilerin_Adları FROM ogrenci WHERE ogrenci_ad LIKE '%s%' GROUP BY ogrenci_id
+SELECT kitaplar.kitap_adi, yazarlar.yazar_ad FROM kitaplar INNER JOIN yazarlar ON kitaplar.yazar_id=yazarlar.yazar_id 
+SELECT DISTINCT ogrenci_kayitzamani FROM ogrenci
+INSERT INTO ogrenci (ogrenci_ad, ogrenci_soyad) VALUES ("seval","otag")
+INSERT INTO ogrenci (ogrenci_kayitzamani, ogrenci_ad, ogrenci_soyad, ogrenci_no, ogrenci_ulke) VALUES ("24/03/2007", "BERKAY", "GUNAY", 521, "AFRICA")
+SELECT yazarlar.yazar_ad AS yazaradları, kitaplar.kitap_adi AS kitapadları FROM kitaplar INNER JOIN yazarlar ON yazarlar.yazar_id=kitaplar.yazar_id
+SELECT yazarlar.yazar_ad, kitaplar.kitap_adi FROM kitaplar LEFT JOIN yazarlar ON yazarlar.yazar_id=kitaplar.yazar_id
+SELECT yazarlar.yazar_ad, kitaplar.kitap_adi FROM kitaplar RIGHT JOIN yazarlar ON yazarlar.yazar_id=kitaplar.yazar_id
+SELECT yazarlar.yazar_ad, kitaplar.kitap_adi FROM yazarlar,kitaplar WHERE yazarlar.yazar_id=kitaplar.yazar_id
+SELECT ogrenci_ad, ogrenci_soyad, AVG(ogrenci_no), COUNT(*) as toplam FROM ogrenci GROUP BY ogrenci_ulke HAVING AVG(ogrenci_no)>250
+SELECT ogrenci_ad, ogrenci_soyad, ogrenci_ulke, AVG(ogrenci_no), COUNT(*) as toplam FROM ogrenci GROUP BY ogrenci_ulke HAVING AVG(ogrenci_no)>250
+SELECT ogrenci_ad, ogrenci_soyad FROM ogrenci GROUP BY ogrenci_id
+SELECT ogrenci_ad, ogrenci_soyad, MAX(ogrenci_no) FROM ogrenci 
+SELECT SUM(ogrenci_id) FROM ogrenci WHERE ogrenci_no>250
+INSERT INTO ogrenci(ogrenci_kayitzamani, ogrenci_ad, ogrenci_soyad) VALUES ("24/05/2012", "AHMET", "KORKAR")
+UPDATE ogrenci SET ogrenci_no=426 WHERE ogrenci_id=28
+UPDATE ogrenci SET ogrenci_no=485 WHERE ogrenci_id=75
+DELETE FROM ogrenci WHERE ogrenci_id="NULL"
+SELECT user.username, user_role.name FROM user LEFT JOIN user_role ON user_role.id= user.user_role_id WHERE user.username= "bakieroglu2" AND user.password= "123456" AND user_role.name="Admin"
